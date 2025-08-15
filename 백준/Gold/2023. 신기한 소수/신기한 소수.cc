@@ -20,7 +20,7 @@ bool checkPrime(int value)
     if (value % 2 == 0)
         return value == 2 ? true : false;
 
-    for (int i = 3; i <= sqrt(value); i+=2)
+    for (int i = 3; i * i <= value; i+=2)
         if (value % i == 0)
             return false;
 
