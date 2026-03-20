@@ -14,32 +14,15 @@ vector<int> solution(vector<int> prices)
     // 상승만 했다면 내림차순
     
     stack<int> s;
-    for(int i = 0; i < prices.size() - 1; i++)
+    for(int i = 0; i < prices.size(); i++)
     {
-        int curr = prices[i];
-        int next = prices[i + 1];
-        if(curr <= next)
+        while(s.empty() == false && prices[s.top()] > prices[i])
         {
-            s.push(i);
+            // 기간을 연산한다
+            answer[s.top()] = i - s.top();
+            s.pop();
         }
-        else
-        {
-            answer[i] = 1;
-            while(s.empty() == false)
-            {
-                // 음전이 발생했다면
-                if(prices[s.top()] > next)
-                {
-                    // 기간을 연산한다
-                    answer[s.top()] = i + 1 - s.top();
-                    s.pop();
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
+        s.push(i);
     }
     
     int len = prices.size() - 1;
